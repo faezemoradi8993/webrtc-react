@@ -1,7 +1,8 @@
 import { useRef, useEffect } from 'react';
+import signalingManuallyImage from "./signalingManually.jpeg"
 import './App.css';
 
-function App() {
+function SignalingManualy() {
   const localVideoRef = useRef()
   const remoteVideoRef = useRef()
   const textRef = useRef()
@@ -82,25 +83,10 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <button onClick={getUserMedia}>get access to camera and microphone</button>
-      <div className='videoContainer'>
-        <div className=''>
-          <video className='video' ref={localVideoRef} autoPlay ></video>
-          <p>local video</p>
-        </div>
-        <div>
-          <video className='video' ref={remoteVideoRef} autoPlay ></video>
-          <p>Remote video</p>
-        </div>
-      </div>
-      <textarea ref={textRef} />
-      <div className='controls'>
-        <button onClick={createOffer}>CREATE OFFER SDT</button>
-        <button onClick={createAnswer}>CREATE ANSWER SDT</button>
-        <button onClick={setRemoteDesc}>SET REMOTE DESCRIPTION</button>
-        <button onClick={addIceCandidate}>ADD THE ICE_CANDIDATE</button>
-      </div>
+    <div className="App card">
+    <h1 style={{textAlign:"center"}}>signaling Manually</h1>
+    
+    <img src={signalingManuallyImage} alt="manually" />
       <h3>do this way to signaling sdp/iceCandidate manually : </h3>
       <ul className='list'>
         <li> open this tab on another tab (as reciving side)</li>
@@ -116,11 +102,26 @@ function App() {
         <li>10 in reciving side: paste candidate in recieving sides texterea </li>
         <li>11 in reciving side: press addCandidate btn </li>
         <li> done! </li>
-
-
       </ul>
+      <textarea ref={textRef} />
+      <div className='controls'>
+        <button onClick={createOffer}>CREATE OFFER SDT</button>
+        <button onClick={createAnswer}>CREATE ANSWER SDT</button>
+        <button onClick={setRemoteDesc}>SET REMOTE DESCRIPTION</button>
+        <button onClick={addIceCandidate}>ADD THE ICE_CANDIDATE</button>
+      </div>
+      <div className='videoContainer'>
+        <div className=''>
+          <video className='video' ref={localVideoRef} autoPlay ></video>
+          <p>local video</p>
+        </div>
+        <div>
+          <video className='video' ref={remoteVideoRef} autoPlay ></video>
+          <p>Remote video</p>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default SignalingManualy;
