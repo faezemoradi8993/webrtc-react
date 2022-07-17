@@ -1,0 +1,38 @@
+.App {
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.video {
+  width: 240px;
+  height: 240px;
+  margin: 20px;
+  background-color: black;
+}
+
+.videoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.controls {
+  display: flex;
+}
+
+.controls button {
+  margin: 5px;
+}
+
+.list {
+  margin: 5px;
+text-align: left;
+}
