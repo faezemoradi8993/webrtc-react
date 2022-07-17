@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react';
 import signalingSooketImage from "./signalingSooketImage.jpeg"
 import './App.css';
-import io from 'socket.io-client'
-
-const socket = io('webRTCPeers', { path: "/webrtc" })
+import { io } from "socket.io-client";
 
 function SignalingSooketIO() {
+  const socketRef = useRef();
+
   const localVideoRef = useRef()
   const remoteVideoRef = useRef()
   const textRef = useRef()
@@ -25,9 +25,11 @@ function SignalingSooketIO() {
     }).catch((err) => { console.log("An error occurred: " + err); })
   }
   useEffect(() => {
-    socket.on("connection-success", success => {
-      console.log(success);
+    socketRef.current = io("ws://localhost:9013")
+    socketRef.current.on("connection", () => {
+      console.log("connected to server");
     })
+
     getUserMedia()
     const peerConnection = new RTCPeerConnection(null)
     peerConnection.onicecandidate = (e) => {
@@ -60,6 +62,7 @@ function SignalingSooketIO() {
       console.log(JSON.stringify(sdp))
       pcRef.current.setLocalDescription(sdp)
       textRef.current.value = JSON.stringify(sdp)
+      socketRef.current.emit("message", new Date().getTime());
     }).catch(err => console.log(err))
 
   }
